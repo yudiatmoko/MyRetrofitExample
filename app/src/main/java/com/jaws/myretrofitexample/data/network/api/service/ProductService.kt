@@ -1,7 +1,7 @@
-package com.jaws.myretrofitexample.data.network
+package com.jaws.myretrofitexample.data.network.api.service
 
-import com.jaws.myretrofitexample.model.ProductsResponse
-import kotlinx.coroutines.flow.Flow
+import com.jaws.myretrofitexample.BuildConfig
+import com.jaws.myretrofitexample.data.network.api.model.ProductsResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,7 +20,7 @@ interface ProductService {
                 .readTimeout(120, TimeUnit.SECONDS)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://dummyjson.com/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()

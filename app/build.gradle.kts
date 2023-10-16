@@ -27,6 +27,12 @@ android {
                 "proguard-rules.pro"
             )
         }
+        flavorDimensions += "version"
+        productFlavors{
+            create("production"){
+                buildConfigField("String", "BASE_URL", "\"https://dummyjson.com/\"")
+            }
+        }
     }
     compileOptions {
         sourceCompatibility =
@@ -39,6 +45,7 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 

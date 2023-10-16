@@ -1,4 +1,4 @@
-package com.jaws.myretrofitexample.model
+package com.jaws.myretrofitexample.data.network.api.model
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

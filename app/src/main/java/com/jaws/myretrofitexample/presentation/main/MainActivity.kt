@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.jaws.myretrofitexample.data.datasource.ProductDataSourceImpl
-import com.jaws.myretrofitexample.data.network.ProductService
+import com.jaws.myretrofitexample.data.network.api.datasource.ProductDataSourceImpl
+import com.jaws.myretrofitexample.data.network.api.service.ProductService
 import com.jaws.myretrofitexample.data.repository.ProductRepositoryImpl
 import com.jaws.myretrofitexample.databinding.ActivityMainBinding
 import com.jaws.myretrofitexample.presentation.main.product.ProductListAdapter
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     binding.rvProduct.isVisible = true
                     binding.layoutState.tvError.isVisible = false
                     binding.layoutState.pbLoading.isVisible = false
-                    it.payload?.let { adapterProduct.setData(it.products) }
+                    it.payload?.let { adapterProduct.setData(it) }
                 },
                 doOnLoading = {
                     binding.rvProduct.isVisible = false

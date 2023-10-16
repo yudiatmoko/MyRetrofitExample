@@ -5,25 +5,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.jaws.myretrofitexample.core.ViewHolderBinder
 import com.jaws.myretrofitexample.databinding.ProductListItemBinding
-import com.jaws.myretrofitexample.model.Product
+import com.jaws.myretrofitexample.model.ProductViewParam
 
 class ProductListAdapter() : RecyclerView.Adapter<ProductItemViewHolder>(){
 
     private val differ = AsyncListDiffer(this,
-        object : DiffUtil.ItemCallback<Product>() {
+        object : DiffUtil.ItemCallback<ProductViewParam>() {
             override fun areItemsTheSame(
-                oldItem: Product,
-                newItem: Product,
+                oldItem: ProductViewParam,
+                newItem: ProductViewParam,
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: Product,
-                newItem: Product,
+                oldItem: ProductViewParam,
+                newItem: ProductViewParam,
             ): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
@@ -46,10 +45,10 @@ class ProductListAdapter() : RecyclerView.Adapter<ProductItemViewHolder>(){
         holder: ProductItemViewHolder,
         position: Int,
     ) {
-        (holder as ViewHolderBinder<Product>).bind(differ.currentList[position])
+        (holder as ViewHolderBinder<ProductViewParam>).bind(differ.currentList[position])
     }
 
-    fun setData(data: List<Product>) {
+    fun setData(data: List<ProductViewParam>) {
         differ.submitList(data)
     }
 
