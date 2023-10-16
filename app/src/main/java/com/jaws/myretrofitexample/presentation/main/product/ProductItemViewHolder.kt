@@ -14,6 +14,6 @@ class ProductItemViewHolder(
         binding.tvProductName.text = item.title
         binding.tvProductPrice.text = String.format("$ %,.0f", (item.price.toDouble()))
         binding.tvProductDesc.text = item.desc
-        binding.ivProductImg.load(item.images[1])
+        binding.ivProductImg.load(item.images[0])
     }
 }
