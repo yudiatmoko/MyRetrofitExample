@@ -1,11 +1,9 @@
 package com.jaws.myretrofitexample.presentation.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jaws.myretrofitexample.data.datasource.ProductDataSourceImpl
@@ -15,8 +13,6 @@ import com.jaws.myretrofitexample.databinding.ActivityMainBinding
 import com.jaws.myretrofitexample.presentation.main.product.ProductListAdapter
 import com.jaws.myretrofitexample.utils.GenericViewModelFactory
 import com.jaws.myretrofitexample.utils.proceedWhen
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,7 +48,21 @@ class MainActivity : AppCompatActivity() {
             it.proceedWhen(
                 doOnSuccess = {
                     binding.rvProduct.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                    binding.layoutState.pbLoading.isVisible = false
                     it.payload?.let { adapterProduct.setData(it.products) }
+                },
+                doOnLoading = {
+                    binding.rvProduct.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    binding.layoutState.pbLoading.isVisible = true
+                },
+                doOnError = {err ->
+                    binding.rvProduct.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.text =
+                        err.exception?.message.orEmpty()
                 }
             )
         }

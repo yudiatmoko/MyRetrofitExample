@@ -13,7 +13,7 @@ data class Product(
     val desc: String,
     @SerializedName("price")
     val price: Long,
-    @SerializedName("image")
+    @SerializedName("images")
     val images: List<String>
 )
 
